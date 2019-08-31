@@ -27,7 +27,8 @@ function actionOnClick () {
 
 
     //send("VKWebAppGetUserInfo", {});
-    send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"photo-54781675_457239018,https://vk.com/app7119027"});
+    //send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"photo-54781675_457239018,https://vk.com/app7119027"});
+    send("VKWebAppShowWallPostBox", {"message": "test! #hashtag","attachments":"photo-54781675_457239019,https://vk.com/app7119527_59559418"});
 
 
 }
