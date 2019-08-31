@@ -27,7 +27,7 @@ function actionOnClick () {
 
 
     //send("VKWebAppGetUserInfo", {});
-    send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"<photo><90321378>_<photo-90321378_375027922>"});
+    send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"https://vk.com/app7119027"});
 
 
 }
