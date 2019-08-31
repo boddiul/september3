@@ -143,7 +143,7 @@
         };
 
         /**
-         * Checks if native client supports nandler
+         * Checks if native client supports handler
          *
          * @param {String} handler Handler name
          * @returns {boolean}
@@ -186,7 +186,12 @@
 
             return false;
         };
+        subscribe((e) => console.log(e));
         send("VKWebAppInit", {});
+
+
+
+
     </script>
 
     <body style="margin:0px; background-color:#008bd4" >
