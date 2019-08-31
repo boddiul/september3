@@ -26,7 +26,9 @@ function actionOnClick () {
     window.open(url, "_blank");*/
 
 
-    send("VKWebAppGetUserInfo", {});
+    //send("VKWebAppGetUserInfo", {});
+    send("VKWebAppShowWallPostBox", {"message": "Hello!"});
+
 
 }
 
