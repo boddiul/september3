@@ -3,9 +3,9 @@ var game = new Phaser.Game(720, 1280, Phaser.AUTO, '', { preload: preload, creat
 
 
 function preload() {
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
+    //game.scale.pageAlignVertically = true;
     game.load.image('back', 'assets/back.png');
 
 }
