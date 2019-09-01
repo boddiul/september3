@@ -2,7 +2,7 @@ const WIDTH = 720;
 const HEIGHT = 1280;
 const COOLDOWN = 15;
 
-const FIRESPREE = 5;
+const FIRESPREE = 20;
 
 
 let game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '', { preload: preload, create: create, update: update });
@@ -12,6 +12,9 @@ function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
+
+    this.game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
+
     game.load.image('back', 'assets/back.png');
     game.load.image('calendar', 'assets/calendar.png');
     game.load.image('repButton', 'assets/repButton.png');
@@ -224,6 +227,23 @@ function  Score() {
     this.n = 0;
     this.spree=0;
 
+
+    this.label = [null,null,null,null,null,null];
+
+    for (let i = 0;i<6;i++)
+    {
+        this.label[i] = game.add.bitmapText(561-73*i, 1180, 'myfont', '', 70);
+        this.label[i].anchor = new Phaser.Point(1,0);
+    }
+
+
+    this.label[0].text = '0';
+
+    this.label[1].y = 1180+10;
+    this.label[2].y = 1180+15;
+    this.label[3].y = 1180+15;
+    this.label[4].y = 1180+10;
+
     this.inc = function(isFast)
     {
         if (isFast)
@@ -236,6 +256,15 @@ function  Score() {
             fire.start();
 
         this.n++;
+
+        this.setText(this.n.toString(10));
+    }
+
+    this.setText = function (txt) {
+
+        for (let i=0;i<6;i++)
+            this.label[i].text = i<txt.length ? txt[txt.length-i-1] : '';
+
     }
 }
 
@@ -263,7 +292,7 @@ function Pulse()
         if (fire.onFire)
         {
             this.step+=1;
-            this.fade = 1-(Math.cos(this.step/10)*0.5+0.5);
+            this.fade = 1-(Math.cos(this.step/30)*0.5+0.5);
         }
 
 
@@ -281,8 +310,8 @@ function create()
     controller = new Controller();
     fire = new Fire();
     calendar = new Calendar();
-    pulse = new Pulse();
     score = new Score();
+    pulse = new Pulse();
     repButton = new RepButton(0,0);
 
 }
