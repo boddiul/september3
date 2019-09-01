@@ -16,8 +16,8 @@ function preload() {
     game.load.spritesheet('anim1','assets/anim1.png',360,427);
     game.load.spritesheet('anim2','assets/anim2.png',360,427);
 
-    game.load.spritesheet('fire2_hot','assets/fire2_hot.png',147,318);
-    game.load.spritesheet('fire3_hot','assets/fire3_hot.png',261,378);
+    game.load.spritesheet('fire2_hot','assets/fire2_hot.png',67,123);
+    game.load.spritesheet('fire3_hot','assets/fire3_hot.png',93,197);
 }
 
 let controller;
@@ -43,7 +43,7 @@ function RepButton(x,y)
         console.log("You reposted in the wrong neighborhood");
 
         //send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"photo-54781675_457239018,https://vk.com/app7119027"});
-        send("VKWebAppShowWallPostBox", {"message": "test! #hashtag","attachments":"photo-54781675_457239019,https://vk.com/app7119527_59559418"});
+        send("VKWebAppShowWallPostBox", {"message": "test! #hashtag","attachments":"photo-102692491_457239019,https://vk.com/app7119527_59559418"});
 
 
     }
@@ -57,13 +57,19 @@ function Fire()
 
     for (let i=1;i<=2;i++)
     {
-        this.hot[i] = game.add.sprite(30,30,"fire"+(i+1)+"_hot");
-        this.hot[i].animations.add('run',null,10,true);
+        this.hot[i] = game.add.sprite(0,0,"fire"+(i+1)+"_hot");
+        this.hot[i].animations.add('run',null,15,true);
         this.hot[i].animations.play('run');
+        this.hot[i].width*=2;
+        this.hot[i].height*=2;
     }
 
 
-    this.hot[1].y=140;
+    this.hot[1].x=226;
+    this.hot[1].y=90;
+
+    this.hot[2].x=530;
+    this.hot[2].y=225;
 }
 
 function Calendar()
@@ -143,9 +149,9 @@ function create()
 
 
     controller = new Controller();
-
-    calendar = new Calendar();
     fire = new Fire();
+    calendar = new Calendar();
+
     repButton = new RepButton(10,10);
 }
 
