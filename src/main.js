@@ -6,15 +6,31 @@ const COOLDOWN = 15;
 let game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 
+function preload() {
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    game.load.image('back', 'assets/back.png');
+    game.load.image('repButton', 'assets/repButton.png');
+    game.load.image('3sept','assets/3sept.png')
+    game.load.spritesheet('anim1','assets/anim1.png',360,427);
+    game.load.spritesheet('anim2','assets/anim2.png',360,427);
+
+    game.load.spritesheet('fire2_hot','assets/fire2_hot.png',147,318);
+    game.load.spritesheet('fire3_hot','assets/fire3_hot.png',261,378);
+}
+
 let controller;
 let repButton;
 let calendar;
+let fire;
 
 
 function Controller()
 {
     this.back = game.add.sprite(0, 0, 'back');
     this.back.inputEnabled = true;
+
 
 }
 
@@ -33,6 +49,21 @@ function RepButton(x,y)
     }
 
     let obj = game.add.button(40, 40, 'repButton', this.pressed, this, 2, 1, 0);
+}
+
+function Fire()
+{
+    this.hot=[null,null,null,null];
+
+    for (let i=1;i<=2;i++)
+    {
+        this.hot[i] = game.add.sprite(30,30,"fire"+(i+1)+"_hot");
+        this.hot[i].animations.add('run',null,10,true);
+        this.hot[i].animations.play('run');
+    }
+
+
+    this.hot[1].y=140;
 }
 
 function Calendar()
@@ -105,17 +136,6 @@ function Calendar()
 
 
 
-function preload() {
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
-    game.load.image('back', 'assets/back.png');
-    game.load.image('repButton', 'assets/repButton.png');
-    game.load.image('3sept','assets/3sept.png')
-    game.load.spritesheet('anim1','assets/anim1.png',360,427);
-    game.load.spritesheet('anim2','assets/anim2.png',360,427);
-}
-
 
 
 function create()
@@ -123,9 +143,10 @@ function create()
 
 
     controller = new Controller();
-    repButton = new RepButton(10,10);
-    calendar = new Calendar();
 
+    calendar = new Calendar();
+    fire = new Fire();
+    repButton = new RepButton(10,10);
 }
 
 
