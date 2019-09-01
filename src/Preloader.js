@@ -79,13 +79,13 @@ BasicGame.Preloader.prototype = {
         this._loadingMask.scale.x = progress / 100;
         if (progress >= 100) {
             this.game.load.onFileComplete.removeAll();
-
+/*
             var self = this;
             this.add.tween(this._logoContainer).to({
                 alpha : 0
             }, 450, null, true, 300).onComplete.addOnce(function() {
                // self.startGame();
-            });
+            });*/
         }
     },
 
@@ -107,10 +107,18 @@ BasicGame.Preloader.prototype = {
         //	If you don't have any music in your game then put the game.state.start line into the create function and delete
         //	the update function completely.
 
-        if (this.cache.isSoundDecoded('soundtrack') && this.ready == false)
+        if (this.cache.isSoundDecoded('soundtrack') && this.ready === false)
         {
             this.ready = true;
-            this.state.start('Game');
+
+
+            var self = this;
+            this.add.tween(this._logoContainer).to({
+                alpha : 0
+            }, 450, null, true, 300).onComplete.addOnce(function() {
+                self.state.start('Game');
+            })
+            //this.
         }
 
     }
