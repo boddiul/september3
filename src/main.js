@@ -13,7 +13,13 @@ function preload() {
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
 
-    this.game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
+
+    game.load.audio('soundtrack', "assets/soundtrack.mp3");
+    game.load.audio('flip1', "assets/flip1.mp3");
+    game.load.audio('flip2', "assets/flip2.mp3");
+    game.load.audio('firestart', "assets/fire_start.mp3");
+    game.load.audio('onfire', "assets/onfire.mp3");
+    game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
 
     game.load.image('back', 'assets/back.png');
     game.load.image('calendar', 'assets/calendar.png');
@@ -45,6 +51,7 @@ function Controller()
     this.back.inputEnabled = true;
 
 
+    this.soundtrack = game.add.audio('soundtrack', 0.9, true);
 
 }
 
@@ -67,18 +74,24 @@ function RepButton(x,y)
 
 function Fire()
 {
+
+    this.firestart = game.add.audio('firestart', 1, false);
+    this.onfire = game.add.audio('onfire', 0.3, true);
+
     this.hot=[null,null,null,null];
 
     this.startF = game.add.sprite(10,0,"fire_start");
     this.startF.animations.add('run',null,23*0.75,false);
     this.startF.animations.getAnimation('run').onComplete.add(
         function(){
+            this.onfire.play();
             this.startF.visible=false;
             for (let i = 0;i < 3; i++)
             {
                 this.hot[i].visible = true;
                 this.hot[i].alpha = 1;
                 //this.hot[i].animations.play('run');
+
             }
             },this);
     //this.startF.animations.play('run');
@@ -112,11 +125,13 @@ function Fire()
     this.start = function () {
         this.startF.visible = true;
         this.startF.animations.play('run');
+        this.firestart.play();
         this.onFire = true;
     }
 
     this.stop = function ()
     {
+        this.onfire.stop();
         this.onFire = false;
         this.fade = 1;
         for (let i = 0;i < 3; i++)
@@ -148,6 +163,9 @@ function Fire()
 function Calendar()
 {
 
+    this.flip1 = game.add.audio('flip1', 0.9, false);
+    this.flip2 = game.add.audio('flip2', 0.9, false);
+
     this.myback = game.add.sprite(104,592,'calendar');
     this.sept = game.add.sprite(0,0,'3sept');
     this.anim1 = game.add.sprite(0,1280-854,'anim1');
@@ -173,19 +191,26 @@ function Calendar()
 
     this.click =  function()
     {
+
+        if (!controller.soundtrack.isPlaying)
+            controller.soundtrack.play();
+
         if (game.input.y>HEIGHT*0.45)
             if (this.cooldown<=1)
             {
 
                 if (this.play1)
                 {
+
                     this.anim1.visible = true;
                     this.anim1.animations.play('flip');
+                    this.flip1.play();
                 }
                 else
                 {
                     this.anim2.visible = true;
                     this.anim2.animations.play('flip');
+                    this.flip2.play();
                 }
 
 
