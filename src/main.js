@@ -19,6 +19,8 @@ function preload() {
     game.load.spritesheet('anim1','assets/anim1.png',360,427);
     game.load.spritesheet('anim2','assets/anim2.png',360,427);
 
+    game.load.image('pulse','assets/pulse.png');
+
     game.load.spritesheet('fire_start','assets/fire_start.png',350,374);
     game.load.spritesheet('fire1_hot','assets/fire1_hot.png',99,166);
     game.load.spritesheet('fire2_hot','assets/fire2_hot.png',67,123);
@@ -31,7 +33,7 @@ let calendar;
 let fire;
 let score;
 
-let overlay;
+let pulse;
 
 
 function Controller()
@@ -238,7 +240,36 @@ function  Score() {
 }
 
 
+function Pulse()
+{
+    this.obj = game.add.sprite(0,0,'pulse');
+    this.obj.alpha = 0;
+    this.fade = 0;
 
+    this.step=0;
+
+
+    this.update = function()
+    {
+
+
+        if (!fire.onFire && this.fade>0)
+        {
+            this.fade-=1/30;
+            this.step = 0;
+        }
+
+
+        if (fire.onFire)
+        {
+            this.step+=1;
+            this.fade = 1-(Math.cos(this.step/10)*0.5+0.5);
+        }
+
+
+        this.obj.alpha = this.fade;
+    }
+}
 
 
 
@@ -250,8 +281,10 @@ function create()
     controller = new Controller();
     fire = new Fire();
     calendar = new Calendar();
+    pulse = new Pulse();
     score = new Score();
     repButton = new RepButton(0,0);
+
 }
 
 
@@ -259,4 +292,5 @@ function update()
 {
     calendar.update();
     fire.update();
+    pulse.update();
 }
