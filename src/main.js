@@ -41,7 +41,10 @@ function Calendar()
     this.sept = game.add.sprite(0,0,'3sept');
     this.anim1 = game.add.sprite(0,1280-854,'anim1');
     this.anim2 = game.add.sprite(0,1280-854,'anim2');
-
+    this.anim1.width = WIDTH;
+    this.anim1.height = 854;
+    this.anim2.width = WIDTH;
+    this.anim2.height = 854;
     this.anim1.animations.add('flip',[0,1,2,3,4,5,6],20,false);
     this.anim2.animations.add('flip',[0,1,2,3,4,5,6],20,false);
 
@@ -109,8 +112,8 @@ function preload() {
     game.load.image('back', 'assets/back.png');
     game.load.image('repButton', 'assets/repButton.png');
     game.load.image('3sept','assets/3sept.png')
-    game.load.spritesheet('anim1','assets/anim1.png',WIDTH,854);
-    game.load.spritesheet('anim2','assets/anim2.png',WIDTH,854);
+    game.load.spritesheet('anim1','assets/anim1.png',360,427);
+    game.load.spritesheet('anim2','assets/anim2.png',360,427);
 }
 
 
