@@ -20,14 +20,6 @@ BasicGame.Preloader.prototype = {
         this._logo.anchor.set(.5);
         this._logo2 = this.make.image(this._logo.x, this._logo.y + 80, "preloader", "logo2");
         this._logo2.anchor.set(.5);
-        this._logo3 = this.make.image(this.world.centerX, this.world.centerY + 2, "preloader", "logo30000");
-        this._logo3.anchor.set(.5);
-        this.add.existing(this._logo3);
-        this._logo3.alpha = 0;
-        this._logo4 = this.make.image(this._logo3.x, this._logo3.y - 34, "preloader", "logo40000");
-        this._logo4.anchor.set(.5);
-        this.add.existing(this._logo4);
-        this._logo4.alpha = 0;
         this._footer = this.make.image(this._logo.x, this._logo.y + 85 + 80, "preloader", "bg0000");
         this._footer.anchor.set(.5);
         this._loading = this.make.image(this._logo.x, this._logo.y + 85 + 80, "preloader", "fg0000");
@@ -59,7 +51,8 @@ BasicGame.Preloader.prototype = {
         this.load.image('back', 'assets/back.png');
         this.load.image('calendar', 'assets/calendar.png');
         this.load.image('repButton', 'assets/repButton.png');
-        this.load.image('3sept','assets/3sept.png')
+        this.load.image('3sept','assets/3sept.png');
+        this.load.image('2sept','assets/2sept.png');
         this.load.spritesheet('anim1','assets/anim1.png',360,427);
         this.load.spritesheet('anim2','assets/anim2.png',360,427);
 
@@ -78,37 +71,21 @@ BasicGame.Preloader.prototype = {
 
     fileComplete: function(progress, cacheKey, success, totalLoaded, totalFiles) {
 
-        // console.log("Preload state load: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         this._loadingMask.scale.x = progress / 100;
         if (progress >= 100) {
             this.game.load.onFileComplete.removeAll();
-/*
-            var self = this;
-            this.add.tween(this._logoContainer).to({
-                alpha : 0
-            }, 450, null, true, 300).onComplete.addOnce(function() {
-               // self.startGame();
-            });*/
+
         }
     },
 
     create: function () {
 
-        //	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
-       // this.preloadBar.cropEnabled = false;
 
     },
 
     update: function () {
 
-        //	You don't actually need to do this, but I find it gives a much smoother game experience.
-        //	Basically it will wait for our audio file to be decoded before proceeding to the MainMenu.
-        //	You can jump right into the menu if you want and still play the music, but you'll have a few
-        //	seconds of delay while the mp3 decodes - so if you need your music to be in-sync with your menu
-        //	it's best to wait for it to decode here first, then carry on.
 
-        //	If you don't have any music in your game then put the game.state.start line into the create function and delete
-        //	the update function completely.
 
         if (this.cache.isSoundDecoded('soundtrack') && this.ready === false)
         {

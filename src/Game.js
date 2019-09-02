@@ -83,7 +83,10 @@ BasicGame.Game.prototype = {
             this.flip2 = game.add.audio('flip2', 0.9, false);
 
             this.myback = game.add.sprite(104,592,'calendar');
-            this.sept = game.add.sprite(0,0,'3sept');
+            this.sept3 = game.add.sprite(0,0,'3sept');
+            this.sept3.visible = false;
+            this.sept2 = game.add.sprite(0,0,'2sept');
+
             this.anim1 = game.add.sprite(0,1280-854,'anim1');
             this.anim2 = game.add.sprite(0,1280-854,'anim2');
             this.anim1.width = WIDTH;
@@ -154,8 +157,15 @@ BasicGame.Game.prototype = {
         {
             if (this.cooldown === Math.trunc(COOLDOWN*0.3))
             {
-                this.sept.x = -3+Math.floor(Math.random()*6)
-                this.sept.y = -3+Math.floor(Math.random()*6)
+
+                if (this.global.score.n <2)
+                {
+                    this.sept3.visible = true;
+                    this.sept2.visible = false;
+                }
+
+                this.sept3.x = -3+Math.floor(Math.random()*6)
+                this.sept3.y = -3+Math.floor(Math.random()*6)
             }
 
             if (this.cooldown>-COOLDOWN*5)
@@ -310,6 +320,8 @@ BasicGame.Game.prototype = {
                 this.global.fire.start();
 
             this.n++;
+
+
 
             if (this.n % 1000 == 0)
                 this.global.mortal.appear();
