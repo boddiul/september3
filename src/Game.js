@@ -311,7 +311,7 @@ BasicGame.Game.prototype = {
 
             this.n++;
 
-            if (this.n % 15 == 0)
+            if (this.n % 1000 == 0)
                 this.global.mortal.appear();
             this.setText(this.n.toString(10));
         }
