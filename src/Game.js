@@ -37,6 +37,8 @@ BasicGame.Game.prototype = {
 
 
             this.soundtrack = game.add.audio('soundtrack', 0.9, true);
+
+            this.global.game.stage.backgroundColor = "#230202";
         }
 
 
@@ -247,7 +249,7 @@ BasicGame.Game.prototype = {
             this.startF.animations.play('run');
             this.firestart.play();
             this.onFire = true;
-            this.global.camera.shake();
+            this.global.camera.shake(0.01);
             //this.global.pulse.short();
         }
 
@@ -255,7 +257,7 @@ BasicGame.Game.prototype = {
         extra()
         {
             this.firestart.play();
-            this.global.camera.shake();
+            this.global.camera.shake(0.01);
            // this.global.pulse.start();
         }
 
@@ -336,7 +338,7 @@ BasicGame.Game.prototype = {
                 this.global.fire.start();
 
 
-             (this.spree==HOTSPREE)
+            if (this.spree==HOTSPREE)
                 this.global.fire.extra();
 
             this.n++;
