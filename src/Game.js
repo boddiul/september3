@@ -383,13 +383,13 @@ BasicGame.Game.prototype = {
 
             this.obj = game.add.sprite(-300, 333, 'mortal');
 
-            this.yuppie = game.add.audio('yuppie', 0.9, false)
+            this.yuppie = game.add.audio('yuppie', 1, false)
 
         }
 
         appear()
         {
-            this.yuppie.play();
+
             let currentTween = game.add.tween(this.obj);
             currentTween.to({ x: 0 },1000,Phaser.Easing.Circular.InOut);
             currentTween.start();
@@ -397,7 +397,7 @@ BasicGame.Game.prototype = {
             currentTween.onComplete.add(
                 function()
                 {
-
+                    this.yuppie.play();
                     let currentTween = game.add.tween(this.obj);
                     currentTween.to({ x: -300 },800,Phaser.Easing.Circular.InOut);
                     currentTween.delay(600);
