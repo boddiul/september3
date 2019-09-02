@@ -175,6 +175,7 @@ BasicGame.Game.prototype = {
                 if (this.global.fire.onFire  && this.cooldown < -COOLDOWN*4)
                 {
                     this.global.fire.stop();
+                    //this.global.pulse.stop();
                 }
             }
 
@@ -237,12 +238,24 @@ BasicGame.Game.prototype = {
             this.hot[2].x=570;
             this.hot[2].y=235;
 
-            this.start = function () {
-                this.startF.visible = true;
-                this.startF.animations.play('run');
-                this.firestart.play();
-                this.onFire = true;
-            }
+
+        }
+
+        start()
+        {
+            this.startF.visible = true;
+            this.startF.animations.play('run');
+            this.firestart.play();
+            this.onFire = true;
+
+            //this.global.pulse.short();
+        }
+
+
+        extra()
+        {
+            this.firestart.play();
+           // this.global.pulse.start();
         }
 
         stop()
@@ -255,6 +268,8 @@ BasicGame.Game.prototype = {
                 //this.hot[i].visible = false;
                 //this.hot[i].animations.stop('run');
             }
+
+            //this.global.pulse.stop();
         }
 
 
@@ -316,8 +331,12 @@ BasicGame.Game.prototype = {
                 this.spree=0;
 
 
-            if (this.spree==FIRESPREE)
+            if (this.spree==FIRESPREE && !this.global.fire.onFire)
                 this.global.fire.start();
+
+
+            // (this.spree==HOTSPREE)
+             //   this.global.fire.extra();
 
             this.n++;
 
@@ -366,7 +385,7 @@ BasicGame.Game.prototype = {
             }
 
 
-            if (this.global.fire.onFire)
+            if (this.global.fire.onFire && this.global.score.spree>HOTSPREE)
             {
                 this.step+=1;
                 this.fade = 1-(Math.cos(this.step/30)*0.5+0.5);
@@ -439,6 +458,7 @@ BasicGame.Game.prototype = {
         this.calendar.update();
         this.fire.update();
         this.pulse.update();
+
     }
 
 
