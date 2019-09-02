@@ -242,11 +242,12 @@ BasicGame.Game.prototype = {
 
         start()
         {
+
             this.startF.visible = true;
             this.startF.animations.play('run');
             this.firestart.play();
             this.onFire = true;
-
+            this.global.camera.shake();
             //this.global.pulse.short();
         }
 
@@ -254,6 +255,7 @@ BasicGame.Game.prototype = {
         extra()
         {
             this.firestart.play();
+            this.global.camera.shake();
            // this.global.pulse.start();
         }
 
@@ -334,8 +336,8 @@ BasicGame.Game.prototype = {
                 this.global.fire.start();
 
 
-            // (this.spree==HOTSPREE)
-             //   this.global.fire.extra();
+             (this.spree==HOTSPREE)
+                this.global.fire.extra();
 
             this.n++;
 
