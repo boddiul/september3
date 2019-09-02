@@ -63,6 +63,9 @@ BasicGame.Preloader.prototype = {
         this.load.spritesheet('anim1','assets/anim1.png',360,427);
         this.load.spritesheet('anim2','assets/anim2.png',360,427);
 
+        this.load.image('mortal','assets/mortal.png')
+        this.load.audio('yuppie','assets/yuppie.mp3')
+
         this.load.image('pulse','assets/pulse.png');
 
         this.load.spritesheet('fire_start','assets/fire_start.png',350,374);
