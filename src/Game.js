@@ -138,7 +138,7 @@ BasicGame.Game.prototype = {
 
 
                     this.play1 = !this.play1;
-                    this.global.score.inc(this.cooldown>-COOLDOWN*0.9);
+                    this.global.score.inc(this.cooldown>-COOLDOWN);
                     this.cooldown = COOLDOWN;
 
 
