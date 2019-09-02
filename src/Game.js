@@ -83,18 +83,38 @@ BasicGame.Game.prototype = {
 
                 if (this.boost)
                 {
+                    this.off.visible = true;
                     this.global.controller.soundtrack.volume=0;
-                    this.global.controller.boosted.volume=0.9;
+                    this.global.controller.boosted.volume=0.8;
                 }
                 else
                 {
+                    this.off.visible = false;
                     this.global.controller.soundtrack.volume=0.9;
                     this.global.controller.boosted.volume=0;
                 }
 
             }
 
-            this.obj = game.add.button(300, 0, 'repButton', this.pressed, this, 2, 1, 0);
+            this.obj = game.add.button(300, -300, 'sndOnButton', this.pressed, this, 2, 1, 0);
+            this.off = game.add.sprite(300, -300, 'sndOffButton');
+            this.off.visible = false;
+
+        }
+
+
+        appear()
+        {
+
+            let currentTween = game.add.tween(this.obj);
+            currentTween.to({ y: 0 },0,Phaser.Easing.Circular.InOut);
+            currentTween.start();
+
+
+            let currentTween2 = game.add.tween(this.off);
+            currentTween2.to({ y: 0 },0,Phaser.Easing.Circular.InOut);
+            currentTween2.start();
+
         }
     },
     sndButton : null,
@@ -285,7 +305,7 @@ BasicGame.Game.prototype = {
             this.startF.animations.play('run');
             this.firestart.play();
             this.onFire = true;
-            this.global.camera.shake(0.02);
+            this.global.camera.shake(0.007);
             //this.global.pulse.short();
         }
 
@@ -293,7 +313,7 @@ BasicGame.Game.prototype = {
         extra()
         {
             this.firestart.play();
-            this.global.camera.shake(0.02);
+            this.global.camera.shake(0.01);
            // this.global.pulse.start();
         }
 
@@ -378,6 +398,9 @@ BasicGame.Game.prototype = {
                 this.global.fire.extra();
 
             this.n++;
+
+            if (this.n ===100)
+                this.global.sndButton.appear();
 
 
 

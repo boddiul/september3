@@ -52,6 +52,10 @@ BasicGame.Preloader.prototype = {
         this.load.image('back', 'assets/back.png');
         this.load.image('calendar', 'assets/calendar.png');
         this.load.image('repButton', 'assets/repButton.png');
+
+        this.load.image('sndOnButton', 'assets/sndON.png');
+        this.load.image('sndOffButton', 'assets/sndOFF.png');
+
         this.load.image('3sept','assets/3sept.png');
         this.load.image('2sept','assets/2sept.png');
         this.load.spritesheet('anim1','assets/anim1.png',360,427);
