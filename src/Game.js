@@ -17,6 +17,7 @@ BasicGame.Game.prototype = {
         this.score = new this.Score(this);
         this.pulse = new this.Pulse(this);
         this.repButton = new this.RepButton(this);
+        this.sndButton = new this.SndButton(this);
 
         this.mortal = new this.Mortal(this);
 
@@ -37,7 +38,7 @@ BasicGame.Game.prototype = {
 
 
             this.soundtrack = game.add.audio('soundtrack', 0.9, true);
-
+            this.boosted = game.add.audio('boosted', 0, true);
             this.global.game.stage.backgroundColor = "#230202";
         }
 
@@ -70,6 +71,33 @@ BasicGame.Game.prototype = {
     },
     repButton : null,
 
+    SndButton : class {
+        constructor(global) {this.global=global;}
+
+        init()
+        {
+            this.boost = false;
+            this.pressed =function() {
+
+                this.boost = !this.boost;
+
+                if (this.boost)
+                {
+                    this.global.controller.soundtrack.volume=0;
+                    this.global.controller.boosted.volume=0.9;
+                }
+                else
+                {
+                    this.global.controller.soundtrack.volume=0.9;
+                    this.global.controller.boosted.volume=0;
+                }
+
+            }
+
+            this.obj = game.add.button(300, 0, 'repButton', this.pressed, this, 2, 1, 0);
+        }
+    },
+    sndButton : null,
 
     Calendar : class {
 
@@ -117,12 +145,20 @@ BasicGame.Game.prototype = {
         {
 
             if (!this.global.controller.soundtrack.isPlaying)
+            {
                 this.global.controller.soundtrack.play();
+
+                this.global.controller.boosted.play();
+            }
+
 
             if (game.input.y>HEIGHT*0.45)
                 if (this.cooldown<=1)
                 {
 
+
+                    if (this.global.sndButton.boost)
+                        this.global.camera.shake(0.01);
                     if (this.play1)
                     {
 
@@ -249,7 +285,7 @@ BasicGame.Game.prototype = {
             this.startF.animations.play('run');
             this.firestart.play();
             this.onFire = true;
-            this.global.camera.shake(0.01);
+            this.global.camera.shake(0.02);
             //this.global.pulse.short();
         }
 
@@ -257,7 +293,7 @@ BasicGame.Game.prototype = {
         extra()
         {
             this.firestart.play();
-            this.global.camera.shake(0.01);
+            this.global.camera.shake(0.02);
            // this.global.pulse.start();
         }
 
@@ -452,7 +488,7 @@ BasicGame.Game.prototype = {
         this.pulse.init();
         this.mortal.init();
         this.repButton.init();
-
+        this.sndButton.init();
 
     },
 

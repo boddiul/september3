@@ -42,6 +42,7 @@ BasicGame.Preloader.prototype = {
         //	Here we load the rest of the assets our game needs.
         //	As this is just a Project Template I've not provided these assets, swap them for your own.
         this.load.audio('soundtrack', "assets/soundtrack.mp3");
+        this.load.audio('boosted', "assets/boosted.mp3");
         this.load.audio('flip1', "assets/flip1.mp3");
         this.load.audio('flip2', "assets/flip2.mp3");
         this.load.audio('firestart', "assets/fire_start.mp3");
@@ -87,7 +88,7 @@ BasicGame.Preloader.prototype = {
 
 
 
-        if (this.cache.isSoundDecoded('soundtrack') && this.ready === false)
+        if (this.cache.isSoundDecoded('soundtrack')  && this.cache.isSoundDecoded('boosted') && this.ready === false)
         {
             this.ready = true;
 
