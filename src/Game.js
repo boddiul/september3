@@ -57,8 +57,7 @@ BasicGame.Game.prototype = {
                 console.log("You reposted in the wrong neighborhood");
 
                 //send("VKWebAppShowWallPostBox", {"message": "Перевернул 300 листов и не жалею об этом! #Шуфунтач","attachments":"photo-54781675_457239018,https://vk.com/app7119027"});
-                send("VKWebAppShowWallPostBox", {"message": "test! #hashtag","attachments":"photo-102692491_457239019,https://vk.com/app7119527_59559418"});
-
+                send("VKWebAppShowWallPostBox", {"message": "Я календарь перевернул "+this.global.score.n+" раз, и снова #третьесентябряч","attachments":"photo-29534144_457967299,https://vk.com/app7119027_59559418"});
 
             }
 
