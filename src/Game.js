@@ -305,7 +305,7 @@ BasicGame.Game.prototype = {
             this.startF.animations.play('run');
             this.firestart.play();
             this.onFire = true;
-            this.global.camera.shake(0.007);
+            //this.global.camera.shake(0.007);
             //this.global.pulse.short();
         }
 
@@ -390,11 +390,11 @@ BasicGame.Game.prototype = {
                 this.spree=0;
 
 
-            if (this.spree==FIRESPREE && !this.global.fire.onFire)
+            if (this.spree===FIRESPREE && !this.global.fire.onFire)
                 this.global.fire.start();
 
 
-            if (this.spree==HOTSPREE)
+            if (this.spree===HOTSPREE)
                 this.global.fire.extra();
 
             this.n++;
@@ -404,7 +404,7 @@ BasicGame.Game.prototype = {
 
 
 
-            if (this.n % 1000 == 0)
+            if (this.n % 1000 === 0)
                 this.global.mortal.appear();
             this.setText(this.n.toString(10));
         }
